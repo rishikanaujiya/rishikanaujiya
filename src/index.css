@@ -2,12 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Definition of the design system for Rishi's Portfolio. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL. Dark mode optimized.
 */
 
 @layer base {
   :root {
+    /* Dark portfolio theme as default */
+    --background: 222 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 217.2 32.6% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 217.2 32.6% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 264 100% 75%;
+    --primary-foreground: 222 84% 4.9%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 264 100% 75%;
+    --accent-foreground: 222 84% 4.9%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 264 100% 75%;
+
+    --radius: 0.75rem;
+
+    /* Portfolio specific colors */
+    --portfolio-gradient-start: 264 100% 75%;
+    --portfolio-gradient-end: 196 100% 70%;
+    --portfolio-surface: 217.2 32.6% 8%;
+    --portfolio-surface-elevated: 217.2 32.6% 12%;
+    --portfolio-text-primary: 210 40% 98%;
+    --portfolio-text-secondary: 215 20.2% 65.1%;
+    --portfolio-accent: 264 100% 75%;
+    
+    /* Sidebar colors for dark theme */
+    --sidebar-background: 222 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 264 100% 75%;
+    --sidebar-primary-foreground: 222 84% 4.9%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 264 100% 75%;
+  }
+
+  .light {
+    /* Light mode (optional toggle) */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -17,7 +70,7 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 264 100% 60%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -26,71 +79,33 @@ All colors MUST be HSL.
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 264 100% 60%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 264 100% 60%;
 
-    --radius: 0.5rem;
+    /* Portfolio specific colors for light mode */
+    --portfolio-gradient-start: 264 100% 60%;
+    --portfolio-gradient-end: 196 100% 50%;
+    --portfolio-surface: 0 0% 100%;
+    --portfolio-surface-elevated: 0 0% 98%;
+    --portfolio-text-primary: 222.2 84% 4.9%;
+    --portfolio-text-secondary: 215.4 16.3% 46.9%;
+    --portfolio-accent: 264 100% 60%;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
+    --sidebar-primary: 264 100% 60%;
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 264 100% 60%;
   }
 }
 
@@ -100,6 +115,36 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .portfolio-gradient {
+    background: linear-gradient(135deg, hsl(var(--portfolio-gradient-start)), hsl(var(--portfolio-gradient-end)));
+  }
+  
+  .portfolio-gradient-text {
+    background: linear-gradient(135deg, hsl(var(--portfolio-gradient-start)), hsl(var(--portfolio-gradient-end)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .portfolio-card {
+    @apply bg-card border border-border rounded-xl p-6 backdrop-blur-sm;
+    box-shadow: 0 8px 32px hsl(var(--background) / 0.1);
+  }
+
+  .portfolio-surface {
+    background: hsl(var(--portfolio-surface));
+  }
+
+  .portfolio-surface-elevated {
+    background: hsl(var(--portfolio-surface-elevated));
   }
 }
