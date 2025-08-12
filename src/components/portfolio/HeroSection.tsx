@@ -208,7 +208,7 @@ const HeroSection = () => {
         }} transition={{
           duration: 1.5,
           repeat: Infinity
-        }} className="w-6 h-10 border-2 border-primary rounded-full flex justify-center">
+        }} className="w-6 h-10 border-2 border-primary rounded-full flex justify-center mx-[10px]">
             <motion.div animate={{
             y: [0, 12, 0]
           }} transition={{
