@@ -214,7 +214,7 @@ const HeroSection = () => {
           }} transition={{
             duration: 1.5,
             repeat: Infinity
-          }} className="w-1 h-3 bg-primary rounded-full mt-2" />
+          }} className="w-1 h-3 bg-primary mt-2 rounded-full" />
           </motion.div>
         </motion.div>
       </div>
