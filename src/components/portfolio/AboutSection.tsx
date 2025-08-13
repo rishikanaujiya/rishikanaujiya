@@ -40,9 +40,11 @@ const AboutSection = () => {
             className="relative group"
           >
             <div className="relative overflow-hidden rounded-2xl portfolio-card">
-              <div className="aspect-square bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                <div className="text-6xl font-bold portfolio-gradient-text">RK</div>
-              </div>
+              <img 
+                src="/src/assets/profile-image.jpg" 
+                alt="Rishi Kanaujiya - Full Stack Developer"
+                className="w-full h-full object-cover aspect-square"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
             {/* Floating elements around the image */}
