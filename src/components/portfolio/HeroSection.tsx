@@ -109,6 +109,25 @@ const HeroSection = () => {
             </div>
             
             <div className="relative space-y-8">
+              {/* Profile Image */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2, duration: 0.8, type: "spring", stiffness: 100 }}
+                className="flex justify-center"
+              >
+                <div className="relative">
+                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl">
+                    <img 
+                      src="/src/assets/profile-image.jpg" 
+                      alt="Rishi Kanaujiya - Full Stack Developer"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/20 to-transparent" />
+                  <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-primary/30 to-accent/30 blur-lg animate-pulse" />
+                </div>
+              </motion.div>
               {/* Enhanced Greeting with Badge */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}

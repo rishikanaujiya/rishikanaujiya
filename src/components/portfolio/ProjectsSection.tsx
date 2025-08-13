@@ -14,7 +14,7 @@ const ProjectsSection = () => {
     {
       title: 'Airbnb-like Website',
       description: 'Full-stack accommodation booking platform with user authentication, property listings, booking system, and payment integration. Built with modern MERN stack technologies.',
-      image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop',
+      image: '/src/assets/airbnb-website.jpg',
       technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT', 'Stripe'],
       liveUrl: '#',
       githubUrl: 'https://github.com/rishikanaujiya',
@@ -32,7 +32,7 @@ const ProjectsSection = () => {
     {
       title: 'Health Tracking Interface',
       description: 'Interactive health monitoring dashboard with patient data visualization, appointment scheduling, and medical records management. Full-stack solution with secure data handling.',
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop',
+      image: '/src/assets/health-tracking.jpg',
       technologies: ['React.js', 'Node.js', 'Chart.js', 'MongoDB'],
       liveUrl: '#',
       githubUrl: 'https://github.com/rishikanaujiya',
@@ -41,7 +41,7 @@ const ProjectsSection = () => {
     {
       title: 'Sign Language to Text Conversion',
       description: 'AI-powered application that converts sign language gestures to text in real-time using computer vision and machine learning. Accessible technology for the hearing impaired.',
-      image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop',
+      image: '/src/assets/sign-language.png',
       technologies: ['Python', 'OpenCV', 'TensorFlow', 'Machine Learning'],
       liveUrl: '#',
       githubUrl: 'https://github.com/rishikanaujiya',
