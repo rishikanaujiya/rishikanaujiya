@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Mail, MapPin, Phone, Github, Linkedin, Send } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 interface ContactFormData {
   name: string;
@@ -51,8 +52,23 @@ const ContactSection = () => {
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // EmailJS configuration
+      const serviceId = 'service_v830ojs';
+      const templateId = 'template_c1t01h8';
+      const publicKey = 'r0obaigL0wLYgss1K';
+
+      // Send email using EmailJS
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: data.name,
+          from_email: data.email,
+          message: data.message,
+          to_name: 'Rishi Kanaujiya',
+        },
+        publicKey
+      );
       
       toast({
         title: "Message sent successfully!",
@@ -61,6 +77,7 @@ const ContactSection = () => {
       
       reset();
     } catch (error) {
+      console.error('EmailJS error:', error);
       toast({
         title: "Failed to send message",
         description: "Please try again or contact me directly via email.",
