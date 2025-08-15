@@ -3,6 +3,9 @@ import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Github, Eye } from 'lucide-react';
+import airbnbImage from '@/assets/airbnb-website.jpg';
+import healthTrackingImage from '@/assets/health-tracking.jpg';
+import signLanguageImage from '@/assets/sign-language.png';
 
 const ProjectsSection = () => {
   const [ref, inView] = useInView({
@@ -14,7 +17,7 @@ const ProjectsSection = () => {
     {
       title: 'Airbnb-like Website',
       description: 'Full-stack accommodation booking platform with user authentication, property listings, booking system, and payment integration. Built with modern MERN stack technologies.',
-      image: '/src/assets/airbnb-website.jpg',
+      image: airbnbImage,
       technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT', 'Stripe'],
       liveUrl: '#',
       githubUrl: 'https://github.com/rishikanaujiya',
@@ -32,7 +35,7 @@ const ProjectsSection = () => {
     {
       title: 'Health Tracking Interface',
       description: 'Interactive health monitoring dashboard with patient data visualization, appointment scheduling, and medical records management. Full-stack solution with secure data handling.',
-      image: '/src/assets/health-tracking.jpg',
+      image: healthTrackingImage,
       technologies: ['React.js', 'Node.js', 'Chart.js', 'MongoDB'],
       liveUrl: '#',
       githubUrl: 'https://github.com/rishikanaujiya',
@@ -41,7 +44,7 @@ const ProjectsSection = () => {
     {
       title: 'Sign Language to Text Conversion',
       description: 'AI-powered application that converts sign language gestures to text in real-time using computer vision and machine learning. Accessible technology for the hearing impaired.',
-      image: '/src/assets/sign-language.png',
+      image: signLanguageImage,
       technologies: ['Python', 'OpenCV', 'TensorFlow', 'Machine Learning'],
       liveUrl: '#',
       githubUrl: 'https://github.com/rishikanaujiya',

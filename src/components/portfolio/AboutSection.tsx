@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { MapPin, Mail, Languages, GraduationCap } from 'lucide-react';
+import profileImage from '@/assets/profile-image.jpg';
 
 const AboutSection = () => {
   const [ref, inView] = useInView({
@@ -41,7 +42,7 @@ const AboutSection = () => {
           >
             <div className="relative overflow-hidden rounded-2xl portfolio-card">
               <img 
-                src="/src/assets/profile-image.jpg" 
+                src={profileImage} 
                 alt="Rishi Kanaujiya - Full Stack Developer"
                 className="w-full h-full object-cover aspect-square"
               />
