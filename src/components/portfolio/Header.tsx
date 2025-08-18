@@ -2,11 +2,21 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Download, Menu, X, Sun, Moon } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Initialize theme from localStorage or default to dark
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('theme');
+      return stored ? stored === 'dark' : true;
+    }
+    return true;
+  });
+  
+  const { toast } = useToast();
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -25,23 +35,65 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Initialize theme on component mount
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      setIsDarkMode(storedTheme === 'dark');
+      document.documentElement.classList.toggle('light', storedTheme === 'light');
+    }
+  }, []);
+
   const toggleTheme = () => {
+    const newTheme = isDarkMode ? 'light' : 'dark';
     setIsDarkMode(!isDarkMode);
+    localStorage.setItem('theme', newTheme);
     document.documentElement.classList.toggle('light');
   };
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: 'smooth' });
+    try {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.warn(`Element with selector ${href} not found`);
+        toast({
+          title: "Navigation Error",
+          description: "The requested section could not be found.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Navigation error:', error);
+      toast({
+        title: "Navigation Error",
+        description: "Unable to navigate to the requested section.",
+        variant: "destructive",
+      });
+    }
   };
 
   const downloadResume = () => {
-    // Create a download link for the resume
-    const link = document.createElement('a');
-    link.href = '/RISHI-Resume.pdf';
-    link.download = 'RISHI-Resume.pdf';
-    link.click();
+    try {
+      const link = document.createElement('a');
+      link.href = '/RISHI-Resume.pdf';
+      link.download = 'RISHI-Resume.pdf';
+      link.click();
+      
+      toast({
+        title: "Resume Download",
+        description: "Resume is being downloaded...",
+      });
+    } catch (error) {
+      console.error('Resume download error:', error);
+      toast({
+        title: "Download Error",
+        description: "Unable to download resume. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (

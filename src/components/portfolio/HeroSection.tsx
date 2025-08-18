@@ -1,20 +1,53 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Download, Mail, Github, Linkedin, Code, Database, Globe, Sparkles, Zap } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const HeroSection = () => {
+  const { toast } = useToast();
+  
   const downloadResume = () => {
-    const link = document.createElement('a');
-    link.href = '/RISHI-Resume.pdf';
-    link.download = 'RISHI-Resume.pdf';
-    link.click();
+    try {
+      const link = document.createElement('a');
+      link.href = '/RISHI-Resume.pdf';
+      link.download = 'RISHI-Resume.pdf';
+      link.click();
+      
+      toast({
+        title: "Resume Download",
+        description: "Resume is being downloaded...",
+      });
+    } catch (error) {
+      console.error('Resume download error:', error);
+      toast({
+        title: "Download Error",
+        description: "Unable to download resume. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const scrollToContact = () => {
-    const element = document.querySelector('#contact');
-    element?.scrollIntoView({
-      behavior: 'smooth'
-    });
+    try {
+      const element = document.querySelector('#contact');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.warn('Contact section not found');
+        toast({
+          title: "Navigation Error",
+          description: "Contact section could not be found.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Scroll to contact error:', error);
+      toast({
+        title: "Navigation Error",
+        description: "Unable to navigate to contact section.",
+        variant: "destructive",
+      });
+    }
   };
 
   const floatingIcons = [

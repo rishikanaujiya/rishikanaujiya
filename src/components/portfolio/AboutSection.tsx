@@ -45,6 +45,11 @@ const AboutSection = () => {
                 src={profileImage} 
                 alt="Rishi Kanaujiya - Full Stack Developer"
                 className="w-full h-full object-cover aspect-square"
+                loading="lazy"
+                onError={(e) => {
+                  console.warn('Failed to load profile image');
+                  e.currentTarget.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop';
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
@@ -110,7 +115,16 @@ const AboutSection = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => {
+                  try {
+                    const element = document.querySelector('#contact');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  } catch (error) {
+                    console.error('Navigation error:', error);
+                  }
+                }}
                 className="inline-flex items-center text-primary hover:text-primary/80 transition-colors duration-200 font-medium"
               >
                 Get in touch
