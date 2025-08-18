@@ -7,6 +7,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Mail, MapPin, Phone, Github, Linkedin, Send } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import DOMPurify from 'dompurify';
+import { useState, useRef } from 'react';
 
 interface ContactFormData {
   name: string;
@@ -22,6 +24,15 @@ const ContactSection = () => {
 
   const { toast } = useToast();
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<ContactFormData>();
+  
+  // Rate limiting state
+  const [lastSubmissionTime, setLastSubmissionTime] = useState<number>(0);
+  const [submitCount, setSubmitCount] = useState<number>(0);
+  const submissionTimeoutRef = useRef<NodeJS.Timeout>();
+
+  // Rate limiting constants
+  const RATE_LIMIT_WINDOW = 30 * 1000; // 30 seconds
+  const MAX_SUBMISSIONS_PER_WINDOW = 1;
 
   const contactInfo = [
     {
@@ -51,20 +62,60 @@ const ContactSection = () => {
   ];
 
   const onSubmit = async (data: ContactFormData) => {
+    // Rate limiting check
+    const now = Date.now();
+    const timeSinceLastSubmission = now - lastSubmissionTime;
+    
+    if (timeSinceLastSubmission < RATE_LIMIT_WINDOW) {
+      toast({
+        title: "Please wait before sending another message",
+        description: `You can send another message in ${Math.ceil((RATE_LIMIT_WINDOW - timeSinceLastSubmission) / 1000)} seconds.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Basic bot protection - simple honeypot check
+    const honeypot = (document.querySelector('input[name="website"]') as HTMLInputElement)?.value;
+    if (honeypot) {
+      console.warn('Bot detected via honeypot field');
+      return;
+    }
+
     try {
+      // Sanitize input data
+      const sanitizedData = {
+        name: DOMPurify.sanitize(data.name.trim()),
+        email: DOMPurify.sanitize(data.email.trim()),
+        message: DOMPurify.sanitize(data.message.trim()),
+      };
+
+      // Additional validation
+      if (!sanitizedData.name || !sanitizedData.email || !sanitizedData.message) {
+        toast({
+          title: "Invalid input",
+          description: "Please fill in all fields with valid content.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Update rate limiting state
+      setLastSubmissionTime(now);
+      setSubmitCount(prev => prev + 1);
       // EmailJS configuration
       const serviceId = 'service_v830ojs';
       const templateId = 'template_c1t01h8';
       const publicKey = 'r0obaigL0wLYgss1K';
 
-      // Send email using EmailJS
+      // Send email using EmailJS with sanitized data
       await emailjs.send(
         serviceId,
         templateId,
         {
-          from_name: data.name,
-          from_email: data.email,
-          message: data.message,
+          from_name: sanitizedData.name,
+          from_email: sanitizedData.email,
+          message: sanitizedData.message,
           to_name: 'Rishi Kanaujiya',
         },
         publicKey
@@ -194,6 +245,15 @@ const ContactSection = () => {
             </h3>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              {/* Honeypot field for bot protection - hidden from users */}
+              <input
+                type="text"
+                name="website"
+                style={{ display: 'none' }}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+              
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                   Name *
