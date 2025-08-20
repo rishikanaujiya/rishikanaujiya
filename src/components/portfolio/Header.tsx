@@ -157,8 +157,10 @@ const Header = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden text-muted-foreground"
+            className="md:hidden text-muted-foreground touch-manipulation mobile-ui-element min-h-[44px] min-w-[44px]"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
@@ -170,38 +172,37 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-4 pb-4 border-t border-border bg-background/95 backdrop-blur-md rounded-lg mx-2"
+            className="md:hidden mt-4 pb-4 border-t border-border bg-background/95 backdrop-blur-md rounded-lg mx-2 shadow-lg"
+            style={{ touchAction: 'manipulation' }}
           >
-            <div className="flex flex-col space-y-3 p-4">
+            <div className="flex flex-col space-y-2 p-4">
               {navItems.map((item, index) => (
-                <motion.button
+                <button
                   key={item.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
                   onClick={() => handleNavClick(item.href)}
-                  className="text-muted-foreground hover:text-primary transition-all duration-200 text-left py-2 px-3 rounded-md hover:bg-muted/50 active:scale-95"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-200 text-left py-3 px-4 rounded-lg hover:bg-muted/50 active:bg-muted/70 min-h-[44px] touch-manipulation"
+                  style={{ WebkitTapHighlightColor: 'transparent' }}
                 >
                   {item.name}
-                </motion.button>
+                </button>
               ))}
-              <div className="flex items-center justify-between pt-3 border-t border-border">
+              <div className="flex flex-col sm:flex-row gap-2 pt-3 border-t border-border">
                 <Button
                   variant="ghost"
-                  size="sm"
                   onClick={toggleTheme}
-                  className="text-muted-foreground hover:text-primary flex-1 mr-2"
+                  className="text-muted-foreground hover:text-primary min-h-[44px] touch-manipulation justify-start"
+                  style={{ WebkitTapHighlightColor: 'transparent' }}
                 >
                   {isDarkMode ? <Sun className="h-4 w-4 mr-2" /> : <Moon className="h-4 w-4 mr-2" />}
-                  {isDarkMode ? 'Light' : 'Dark'}
+                  {isDarkMode ? 'Light Mode' : 'Dark Mode'}
                 </Button>
                 <Button
                   onClick={downloadResume}
-                  size="sm"
-                  className="portfolio-gradient text-primary-foreground flex-1 ml-2"
+                  className="portfolio-gradient text-primary-foreground min-h-[44px] touch-manipulation"
+                  style={{ WebkitTapHighlightColor: 'transparent' }}
                 >
                   <Download className="w-4 h-4 mr-2" />
-                  Resume
+                  Download Resume
                 </Button>
               </div>
             </div>

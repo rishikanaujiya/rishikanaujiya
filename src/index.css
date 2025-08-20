@@ -148,3 +148,60 @@ All colors MUST be HSL. Dark mode optimized.
     background: hsl(var(--portfolio-surface-elevated));
   }
 }
+
+/* Mobile Performance & Touch Optimizations */
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent mobile zoom on inputs */
+input, select, textarea {
+  font-size: 16px;
+}
+
+/* Mobile viewport optimizations */
+@media (max-width: 768px) {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior: contain;
+  }
+  
+  /* Reduce animations on mobile for better performance */
+  .motion-reduce {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Mobile-specific button styling */
+  button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Prevent text selection on UI elements */
+  .mobile-ui-element {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: hsl(0 0% 30%);
+    --ring: hsl(210 40% 70%);
+  }
+}
