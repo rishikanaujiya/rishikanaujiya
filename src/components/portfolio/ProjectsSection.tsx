@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Github, Eye } from 'lucide-react';
@@ -8,6 +9,7 @@ import healthTrackingImage from '@/assets/health-tracking.jpg';
 import signLanguageImage from '@/assets/sign-language.png';
 
 const ProjectsSection = () => {
+  const [loadingImages, setLoadingImages] = useState<{ [key: string]: boolean }>({});
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,

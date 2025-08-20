@@ -170,30 +170,35 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-4 pb-4 border-t border-border"
+            className="md:hidden mt-4 pb-4 border-t border-border bg-background/95 backdrop-blur-md rounded-lg mx-2"
           >
-            <div className="flex flex-col space-y-4 pt-4">
-              {navItems.map((item) => (
-                <button
+            <div className="flex flex-col space-y-3 p-4">
+              {navItems.map((item, index) => (
+                <motion.button
                   key={item.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
                   onClick={() => handleNavClick(item.href)}
-                  className="text-muted-foreground hover:text-primary transition-colors duration-200 text-left"
+                  className="text-muted-foreground hover:text-primary transition-all duration-200 text-left py-2 px-3 rounded-md hover:bg-muted/50 active:scale-95"
                 >
                   {item.name}
-                </button>
+                </motion.button>
               ))}
-              <div className="flex items-center space-x-4 pt-4">
+              <div className="flex items-center justify-between pt-3 border-t border-border">
                 <Button
                   variant="ghost"
-                  size="icon"
+                  size="sm"
                   onClick={toggleTheme}
-                  className="text-muted-foreground hover:text-primary"
+                  className="text-muted-foreground hover:text-primary flex-1 mr-2"
                 >
-                  {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                  {isDarkMode ? <Sun className="h-4 w-4 mr-2" /> : <Moon className="h-4 w-4 mr-2" />}
+                  {isDarkMode ? 'Light' : 'Dark'}
                 </Button>
                 <Button
                   onClick={downloadResume}
-                  className="portfolio-gradient text-primary-foreground"
+                  size="sm"
+                  className="portfolio-gradient text-primary-foreground flex-1 ml-2"
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Resume
