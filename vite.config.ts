@@ -2,11 +2,14 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
-// If you host at https://<user>.github.io/rishikanaujiya/ keep base below.
-// If you use a custom domain (e.g. rishikanaujiya.online) change to base: "/".
+// ✅ For custom domain (rishikanaujiya.online), base must be "/"
 export default defineConfig({
-  base: "/rishikanaujiya/",
+  base: "/", 
   server: { host: "::", port: 5173 },
   plugins: [react()],
-  resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 });
