@@ -7,7 +7,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]   // ✅ alias fix (removed unnecessary "./")
     },
     "noImplicitAny": false,
     "noUnusedParameters": false,
