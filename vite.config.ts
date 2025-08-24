@@ -9,6 +9,5 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // ✅ IMPORTANT: for custom domain
   base: "/", 
 });
