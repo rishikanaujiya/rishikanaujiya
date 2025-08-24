@@ -1,6 +1,9 @@
 {
-  "name": "Rishi Portfolio",
-  "version": "1.0.0",
-  "description": "My portfolio deployed on GitHub Pages",
-  "author": "Rishi Kanaujiya"
+  "name": "Rishi Kanaujiya - Portfolio",
+  "short_name": "RishiKanaujiya",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "description": "Passionate Full Stack MERN Developer specializing in React, Node.js, MongoDB, and modern web applications."
 }
