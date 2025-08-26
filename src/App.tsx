@@ -12,23 +12,21 @@ const queryClient = new QueryClient();
 
 const App = (): ReactElement => {
   return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          {/* Global toast notifications */}
-          <Sonner position="top-right" />
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        {/* Global toast notifications */}
+        <Sonner position="top-right" />
 
-          {/* Router */}
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              {/* Catch-all route for 404 pages */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </React.StrictMode>
+        {/* Router */}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            {/* Catch-all route for 404 pages */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
   );
 };
 
