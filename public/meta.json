@@ -1,7 +1,7 @@
 {
   "name": "Rishi Kanaujiya - Portfolio",
   "short_name": "Rishi",
-  "start_url": "rishikanaujiya.online",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
