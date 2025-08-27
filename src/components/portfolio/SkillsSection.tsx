@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
+import { Code, Database, Globe, Wrench } from 'lucide-react';
 
 const SkillsSection = () => {
   const [ref, inView] = useInView({
@@ -12,39 +12,27 @@ const SkillsSection = () => {
   const skillCategories = [
     {
       title: 'Frontend',
-      skills: [
-        { name: 'HTML/CSS', level: 95 },
-        { name: 'JavaScript', level: 90 },
-        { name: 'React.js', level: 88 },
-        { name: 'Tailwind CSS', level: 92 },
-        { name: 'EJS', level: 80 },
-      ],
+      icon: Globe,
+      skills: ['HTML/CSS', 'JavaScript', 'React.js', 'Tailwind CSS', 'EJS'],
+      color: 'from-blue-500 to-cyan-500',
     },
     {
       title: 'Backend',
-      skills: [
-        { name: 'Node.js', level: 85 },
-        { name: 'Express.js', level: 88 },
-        { name: 'REST APIs', level: 90 },
-        { name: 'Authentication', level: 82 },
-      ],
+      icon: Code,
+      skills: ['Node.js', 'Express.js', 'REST APIs', 'Authentication'],
+      color: 'from-green-500 to-emerald-500',
     },
     {
       title: 'Database',
-      skills: [
-        { name: 'MongoDB', level: 85 },
-        { name: 'SQL', level: 78 },
-        { name: 'Mongoose', level: 88 },
-      ],
+      icon: Database,
+      skills: ['MongoDB', 'SQL', 'Mongoose'],
+      color: 'from-purple-500 to-violet-500',
     },
     {
       title: 'Other',
-      skills: [
-        { name: 'Python', level: 82 },
-        { name: 'C++', level: 85 },
-        { name: 'Git/GitHub', level: 90 },
-        { name: 'Debugging', level: 88 },
-      ],
+      icon: Wrench,
+      skills: ['Python', 'C++', 'Git/GitHub', 'Debugging'],
+      color: 'from-orange-500 to-red-500',
     },
   ];
 
@@ -73,56 +61,50 @@ const SkillsSection = () => {
           </p>
         </motion.div>
 
-        {/* Skills Progress Bars */}
+        {/* Skills Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-              className="portfolio-card group hover:shadow-lg transition-shadow duration-300"
-            >
-              <h3 className="text-xl font-semibold mb-6 portfolio-gradient-text">
-                {category.title}
-              </h3>
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={inView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ 
-                      duration: 0.6, 
-                      delay: categoryIndex * 0.1 + skillIndex * 0.05 
-                    }}
-                  >
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium text-foreground">
-                        {skill.name}
-                      </span>
-                      <span className="text-sm text-muted-foreground">
-                        {skill.level}%
-                      </span>
-                    </div>
+          {skillCategories.map((category, categoryIndex) => {
+            const IconComponent = category.icon;
+            return (
+              <motion.div
+                key={category.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+                className="portfolio-card group hover:shadow-lg transition-all duration-300 hover:-translate-y-2"
+              >
+                <div className="text-center mb-6">
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${category.color} flex items-center justify-center shadow-lg`}>
+                    <IconComponent className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold portfolio-gradient-text">
+                    {category.title}
+                  </h3>
+                </div>
+                <div className="space-y-3">
+                  {category.skills.map((skill, skillIndex) => (
                     <motion.div
-                      initial={{ width: 0 }}
-                      animate={inView ? { width: '100%' } : {}}
+                      key={skill}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={inView ? { opacity: 1, x: 0 } : {}}
                       transition={{ 
-                        duration: 1, 
-                        delay: categoryIndex * 0.2 + skillIndex * 0.1 
+                        duration: 0.6, 
+                        delay: categoryIndex * 0.1 + skillIndex * 0.05 
                       }}
+                      className="relative"
                     >
-                      <Progress 
-                        value={inView ? skill.level : 0} 
-                        className="h-2"
-                      />
+                      <div className="flex items-center space-x-3 p-2 rounded-lg bg-portfolio-surface-elevated/50 hover:bg-portfolio-surface-elevated transition-colors duration-200">
+                        <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${category.color} flex-shrink-0`} />
+                        <span className="text-sm font-medium text-foreground">
+                          {skill}
+                        </span>
+                      </div>
                     </motion.div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Technology Badges */}
