@@ -5,7 +5,8 @@ import { Calendar, MapPin, Building, Award } from 'lucide-react';
 const ExperienceSection = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.2,
+    threshold: 0.1,
+    rootMargin: '-50px 0px',
   });
 
   const experiences = [
@@ -73,9 +74,9 @@ const ExperienceSection = () => {
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -91,9 +92,9 @@ const ExperienceSection = () => {
           {/* Experience Timeline */}
           <div>
             <motion.h3
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -10 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
               className="text-2xl font-bold mb-8 text-foreground"
             >
               Professional Experience
@@ -106,9 +107,9 @@ const ExperienceSection = () => {
               {experiences.map((exp, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: -30 }}
+                  initial={{ opacity: 0, x: -15 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.2 }}
+                  transition={{ duration: 0.3, delay: 0.2 + index * 0.1, ease: "easeOut" }}
                   className="relative pl-12 pb-12 last:pb-0"
                 >
                   {/* Timeline Dot */}
@@ -122,7 +123,7 @@ const ExperienceSection = () => {
                     }`}></div>
                   </div>
 
-                  <div className="portfolio-card group hover:shadow-lg transition-shadow duration-300">
+                  <div className="portfolio-card group hover:shadow-lg transition-all duration-200 will-change-transform">
                     {exp.current && (
                       <div className="inline-block px-3 py-1 text-xs font-semibold portfolio-gradient text-primary-foreground rounded-full mb-3">
                         Current
@@ -176,9 +177,9 @@ const ExperienceSection = () => {
           {/* Achievements & Certifications */}
           <div>
             <motion.h3
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 10 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
               className="text-2xl font-bold mb-8 text-foreground"
             >
               Achievements & Activities
@@ -188,10 +189,10 @@ const ExperienceSection = () => {
               {achievements.map((achievement, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: 30 }}
+                  initial={{ opacity: 0, x: 15 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-                  className="portfolio-card group hover:shadow-lg transition-all duration-300 hover:border-primary/30"
+                  transition={{ duration: 0.3, delay: 0.2 + index * 0.05, ease: "easeOut" }}
+                  className="portfolio-card group hover:shadow-lg transition-all duration-200 hover:border-primary/30 will-change-transform"
                 >
                   <div className="flex items-start space-x-4">
                     <div className="p-3 rounded-lg portfolio-gradient flex-shrink-0">
@@ -215,9 +216,9 @@ const ExperienceSection = () => {
 
             {/* Competitive Programming Section */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              transition={{ duration: 0.3, delay: 0.4, ease: "easeOut" }}
               className="mt-12"
             >
               <h4 className="text-xl font-bold mb-6 text-foreground">
@@ -232,14 +233,15 @@ const ExperienceSection = () => {
                     Active problem solver with consistent progress in data structures and algorithms
                   </p>
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center text-primary hover:text-primary/80 transition-colors duration-200 font-medium"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.15 }}
+                    className="inline-flex items-center text-primary hover:text-primary/80 transition-colors duration-150 font-medium will-change-transform"
                   >
                     View LeetCode Profile
                     <motion.span
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
+                      animate={{ x: [0, 3, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                       className="ml-2"
                     >
                       →
